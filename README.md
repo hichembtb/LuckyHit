@@ -1,4 +1,4 @@
-# test_app
+# Lucky Hit
 
 A new Flutter project.
 
