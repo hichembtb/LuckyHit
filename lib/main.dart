@@ -6,7 +6,6 @@ import 'package:test_app/home.dart';
 import 'package:test_app/provider.dart';
 import 'package:test_app/winner.dart';
 
-
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
   SystemChrome.setPreferredOrientations([
@@ -30,7 +29,6 @@ class MyApp extends StatelessWidget {
           "winner": (context) => Winner(),
           "test": (context) => Test(),
           "game": (context) => Game(),
-          // "winnertwo": (context) => Winnertwo(),
         },
         theme: ThemeData(
           scaffoldBackgroundColor: Colors.white,

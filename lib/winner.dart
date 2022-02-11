@@ -5,7 +5,6 @@ import 'package:test_app/animation.dart';
 import 'package:test_app/home.dart';
 import 'package:test_app/provider.dart';
 
-
 class Winner extends StatefulWidget {
   @override
   _WinnerState createState() => _WinnerState();
@@ -29,7 +28,7 @@ class _WinnerState extends State<Winner> {
                 builder: (context, prov, child) {
                   return FloatingActionButton(
                     heroTag: null,
-                    backgroundColor: Colors.redAccent,
+                    backgroundColor: const Color.fromARGB(255, 2, 41, 167),
                     onPressed: () {
                       prov.check1 = null;
                       prov.check2 = null;
@@ -45,7 +44,7 @@ class _WinnerState extends State<Winner> {
                 },
               ),
               FloatingActionButton(
-                backgroundColor: Colors.redAccent,
+                backgroundColor: const Color.fromARGB(255, 2, 41, 167),
                 onPressed: () {
                   SystemNavigator.pop();
                 },
@@ -63,8 +62,8 @@ class _WinnerState extends State<Winner> {
                 end: Alignment.bottomLeft,
                 stops: [0.3, 0.9],
                 colors: [
-                  Color(0xFF544a7d),
-                  Color(0xFFffd452),
+                  Color.fromARGB(255, 227, 224, 236),
+                  Color.fromARGB(255, 255, 255, 214),
                 ],
               ),
             ),
@@ -86,17 +85,18 @@ class _WinnerState extends State<Winner> {
                   builder: (context, prov, child) {
                     return CircleAvatar(
                       child: Container(
-                        decoration: BoxDecoration(
+                        decoration: const BoxDecoration(
                           shape: BoxShape.circle,
-                          border: Border.all(color: Colors.black, width: 2),
+
                           //color: Colors.red,
                           //borderRadius: BorderRadius.circular(16),
                         ),
                       ),
+                      backgroundColor: Colors.transparent,
                       backgroundImage: prov.genderwinner == "Female"
                           ? const AssetImage("images/female.png")
                           : const AssetImage("images/male.jpg"),
-                      radius: 50,
+                      radius: 120,
                     );
                   },
                 ),
@@ -116,14 +116,14 @@ class _WinnerState extends State<Winner> {
                   builder: (context, prov, child) {
                     return ShaderMask(
                       shaderCallback: (Rect bounds) {
-                        return RadialGradient(
+                        return const RadialGradient(
                           radius: 0.5,
-                          stops: const [0.1, 0.4, 0.5, 0.9],
+                          stops: [0.1, 0.4, 0.5, 0.9],
                           colors: [
                             Colors.black,
-                            Colors.red.shade900,
+                            Color.fromARGB(255, 2, 41, 167),
                             Colors.black,
-                            Colors.red.shade900,
+                            Color.fromARGB(255, 2, 41, 167),
                           ],
                           tileMode: TileMode.mirror,
                         ).createShader(bounds);
@@ -131,11 +131,12 @@ class _WinnerState extends State<Winner> {
                       child: Text(
                         "${prov.winner}",
                         style: const TextStyle(
-                            fontSize: 50,
-                            letterSpacing: 2,
-                            //fontStyle: FontStyle.italic,
-                            fontFamily: "Rye",
-                            color: Colors.white),
+                          fontSize: 50,
+                          letterSpacing: 10,
+                          //fontStyle: FontStyle.italic,
+                          fontFamily: "Rye",
+                          color: Colors.white,
+                        ),
                       ),
                     );
                   },

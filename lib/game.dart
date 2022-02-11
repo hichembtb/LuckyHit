@@ -20,20 +20,8 @@ class _GameState extends State<Game> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        body: Container(
-          decoration: const BoxDecoration(
-            gradient: LinearGradient(
-              begin: Alignment.topRight,
-              end: Alignment.bottomLeft,
-              colors: [
-                Color(0xFF3a6168),
-                Color(0xFF89253e),
-              ],
-            ),
-          ),
-          width: double.infinity,
-          height: MediaQuery.of(context).size.height,
-          padding: const EdgeInsets.all(10),
+        body: Padding(
+          padding: const EdgeInsets.all(8.0),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
@@ -66,40 +54,26 @@ class _GameState extends State<Game> {
                   ),
                 ),
               ),
-              ShaderMask(
-                shaderCallback: (Rect bounds) {
-                  return const RadialGradient(
-                    colors: [
-                      Colors.blue,
-                      Colors.black,
-                      Colors.red,
-                    ],
-                    radius: 1.0,
-                  ).createShader(bounds);
-                },
-                child: Container(
-                  padding: const EdgeInsets.all(10),
-                  margin: const EdgeInsets.all(10),
-                  height: 70,
-                  width: 70,
-                  alignment: Alignment.center,
-                  child: Consumer<MyProvider>(
+              Stack(
+                alignment: Alignment.center,
+                children: [
+                  Image.asset(
+                    "images/splash2.png",
+                    height: MediaQuery.of(context).size.height * 0.1,
+                  ),
+                  Consumer<MyProvider>(
                     builder: (context, prov, child) {
                       return Text(
                         "${prov.luckynum}",
                         style: const TextStyle(
-                          fontSize: 25,
+                          fontSize: 25.0,
+                          color: Colors.black,
                           fontWeight: FontWeight.bold,
                         ),
                       );
                     },
                   ),
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    border: Border.all(color: Colors.black, width: 3),
-                    borderRadius: BorderRadius.circular(16),
-                  ),
-                ),
+                ],
               ),
               const SizedBox(
                 height: 50,
@@ -136,8 +110,11 @@ class _GameState extends State<Game> {
                               ),
                             ),
                             radius: 50,
+                            backgroundColor: Colors.transparent,
                             backgroundImage: prov.gender1 == "Female"
-                                ? const AssetImage("images/female.png")
+                                ? const AssetImage(
+                                    "images/female.png",
+                                  )
                                 : const AssetImage("images/male.jpg"),
                           );
                         },
@@ -148,6 +125,8 @@ class _GameState extends State<Game> {
                       Consumer<MyProvider>(
                         builder: (context, prov, child) {
                           return InkWell(
+                            highlightColor: Colors.transparent,
+                            splashColor: Colors.transparent,
                             onTap: () {
                               setState(
                                 () {
@@ -170,70 +149,57 @@ class _GameState extends State<Game> {
                               );
                             },
                             child: disablebutton == false
-                                ? ShaderMask(
-                                    shaderCallback: (Rect bounds) {
-                                      return const RadialGradient(
-                                        colors: [
-                                          Colors.blue,
-                                          Colors.black,
-                                          Colors.red,
-                                        ],
-                                        radius: 1.0,
-                                      ).createShader(bounds);
-                                    },
-                                    child: Container(
-                                      decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.circular(35),
-                                        color: Colors.white,
-                                        border: Border.all(
-                                            color: Colors.black, width: 1),
-                                      ),
-                                      padding: const EdgeInsets.all(10),
-                                      margin: const EdgeInsets.all(10),
-                                      height: 100,
-                                      width: 100,
+                                ? Container(
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(35),
+                                      // color: Colors.white,
+                                    ),
+                                    margin: const EdgeInsets.all(10),
+                                    height: 100,
+                                    width: 100,
+                                    child: Stack(
                                       alignment: Alignment.center,
-                                      child: Text(
-                                        "$number",
-                                        style: const TextStyle(
-                                          fontSize: 30,
-                                          fontWeight: FontWeight.w900,
-                                          color: Colors.black,
+                                      children: [
+                                        Image.asset(
+                                          "images/splash2.png",
+                                          fit: BoxFit.contain,
                                         ),
-                                      ),
+                                        Text(
+                                          "$number",
+                                          style: const TextStyle(
+                                            fontSize: 30,
+                                            fontWeight: FontWeight.w900,
+                                            color: Colors.black,
+                                          ),
+                                        )
+                                      ],
                                     ),
                                   )
                                 //Second ShaderMAsk
-                                : ShaderMask(
-                                    shaderCallback: (Rect bounds) {
-                                      return const RadialGradient(
-                                        colors: [
-                                          Colors.red,
-                                          Colors.black,
-                                          Colors.white,
-                                        ],
-                                        radius: 1.0,
-                                      ).createShader(bounds);
-                                    },
-                                    child: Container(
-                                      decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.circular(35),
-                                        color: Colors.white,
-                                        border: Border.all(
-                                            color: Colors.black, width: 1),
-                                      ),
-                                      padding: const EdgeInsets.all(10),
-                                      margin: const EdgeInsets.all(10),
-                                      height: 100,
-                                      width: 100,
+                                : Container(
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(35),
+                                      // color: Colors.white,
+                                    ),
+                                    margin: const EdgeInsets.all(10),
+                                    height: 100,
+                                    width: 100,
+                                    child: Stack(
                                       alignment: Alignment.center,
-                                      child: Text(
-                                        "$number",
-                                        style: const TextStyle(
+                                      children: [
+                                        Image.asset(
+                                          "images/splash3.png",
+                                          fit: BoxFit.contain,
+                                        ),
+                                        Text(
+                                          "$number",
+                                          style: const TextStyle(
                                             fontSize: 30,
                                             fontWeight: FontWeight.w900,
-                                            color: Colors.black),
-                                      ),
+                                            color: Colors.black,
+                                          ),
+                                        )
+                                      ],
                                     ),
                                   ),
                           );
@@ -270,6 +236,7 @@ class _GameState extends State<Game> {
                               ),
                             ),
                             radius: 50,
+                            backgroundColor: Colors.transparent,
                             backgroundImage: prov.gender2 == "Female"
                                 ? const AssetImage("images/female.png")
                                 : const AssetImage("images/male.jpg"),
@@ -282,96 +249,83 @@ class _GameState extends State<Game> {
                       Consumer<MyProvider>(
                         builder: (context, prov, child) {
                           return InkWell(
-                              onTap: () {
-                                setState(() {
-                                  // disablebutton = !disablebutton;
-                                  if (disablebutton == false) {
-                                    return;
-                                  } else {
-                                    number2 =
-                                        Random().nextInt(prov.maximum) + 1;
-                                    if (number2 == prov.luckynum) {
-                                      prov.genderwinner = prov.gender2;
-                                      prov.winner = prov.user2;
-                                      Navigator.of(context).pushReplacement(
-                                        GameToWinner(
-                                          Page: Winner(),
-                                        ),
-                                      );
-                                    }
-                                    disablebutton = !disablebutton;
+                            highlightColor: Colors.transparent,
+                            splashColor: Colors.transparent,
+                            onTap: () {
+                              setState(() {
+                                // disablebutton = !disablebutton;
+                                if (disablebutton == false) {
+                                  return;
+                                } else {
+                                  number2 = Random().nextInt(prov.maximum) + 1;
+                                  if (number2 == prov.luckynum) {
+                                    prov.genderwinner = prov.gender2;
+                                    prov.winner = prov.user2;
+                                    Navigator.of(context).pushReplacement(
+                                      GameToWinner(
+                                        Page: Winner(),
+                                      ),
+                                    );
                                   }
-                                });
-                              },
-                              child: disablebutton == false
-                                  ? ShaderMask(
-                                      shaderCallback: (Rect bounds) {
-                                        return const RadialGradient(
-                                          colors: [
-                                            Colors.red,
-                                            Colors.black,
-                                            Colors.white,
-                                          ],
-                                          radius: 1.0,
-                                        ).createShader(bounds);
-                                      },
-                                      child: Container(
-                                        decoration: BoxDecoration(
-                                          borderRadius:
-                                              BorderRadius.circular(35),
-                                          color: Colors.white,
-                                          border: Border.all(
-                                              color: Colors.black, width: 1),
+                                  disablebutton = !disablebutton;
+                                }
+                              });
+                            },
+                            child: disablebutton == false
+                                ? Container(
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(35),
+                                      // color: Colors.white,
+                                    ),
+                                    margin: const EdgeInsets.all(10),
+                                    height: 100,
+                                    width: 100,
+                                    child: Stack(
+                                      alignment: Alignment.center,
+                                      children: [
+                                        Image.asset(
+                                          "images/splash3.png",
+                                          fit: BoxFit.contain,
                                         ),
-                                        padding: const EdgeInsets.all(10),
-                                        margin: const EdgeInsets.all(10),
-                                        height: 100,
-                                        width: 100,
-                                        alignment: Alignment.center,
-                                        child: Text(
+                                        Text(
                                           "$number2",
                                           style: const TextStyle(
-                                              fontSize: 30,
-                                              fontWeight: FontWeight.w900,
-                                              color: Colors.black),
+                                            fontSize: 30,
+                                            fontWeight: FontWeight.bold,
+                                            color: Colors.black,
+                                          ),
+                                        )
+                                      ],
+                                    ),
+                                  )
+                                //Second 2 ShadeMAsk
+                                : Container(
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(35),
+                                      // color: Colors.white,
+                                    ),
+                                    margin: const EdgeInsets.all(10),
+                                    height: 100,
+                                    width: 100,
+                                    child: Stack(
+                                      alignment: Alignment.center,
+                                      children: [
+                                        Image.asset(
+                                          "images/splash2.png",
+                                          fit: BoxFit.contain,
                                         ),
-                                      ),
-                                    )
-                                  //Second 2 ShadeMAsk
-                                  : ShaderMask(
-                                      shaderCallback: (Rect bounds) {
-                                        return const RadialGradient(
-                                                colors: [
-                                              Colors.blue,
-                                              Colors.black,
-                                              Colors.red,
-                                            ],
-                                                radius: 1.0,
-                                                tileMode: TileMode.mirror)
-                                            .createShader(bounds);
-                                      },
-                                      child: Container(
-                                        decoration: BoxDecoration(
-                                          borderRadius:
-                                              BorderRadius.circular(35),
-                                          color: Colors.white,
-                                          border: Border.all(
-                                              color: Colors.black, width: 1),
-                                        ),
-                                        padding: const EdgeInsets.all(10),
-                                        margin: const EdgeInsets.all(10),
-                                        height: 100,
-                                        width: 100,
-                                        alignment: Alignment.center,
-                                        child: Text(
+                                        Text(
                                           "$number2",
                                           style: const TextStyle(
-                                              fontSize: 30,
-                                              fontWeight: FontWeight.w900,
-                                              color: Colors.black),
-                                        ),
-                                      ),
-                                    ));
+                                            fontSize: 30,
+                                            fontWeight: FontWeight.w900,
+                                            color: Colors.black,
+                                          ),
+                                        )
+                                      ],
+                                    ),
+                                  ),
+                          );
                         },
                       )
                     ],
@@ -381,44 +335,29 @@ class _GameState extends State<Game> {
               const SizedBox(
                 height: 70,
               ),
-              ShaderMask(
-                shaderCallback: (Rect bounds) {
-                  return RadialGradient(
-                      center: Alignment.topLeft,
-                      radius: 1.0,
-                      tileMode: TileMode.mirror,
-                      colors: [
-                        Colors.blue.shade900,
-                        Colors.blue.shade400,
-                        Colors.lightBlue.shade900,
-                        Colors.blue.shade900,
-                      ],
-                      stops: const [
-                        0.0,
-                        0.2,
-                        0.5,
-                        0.8
-                      ]).createShader(bounds);
-                },
-                child: InkWell(
-                  child: Container(
-                    decoration: BoxDecoration(
+              InkWell(
+                child: Container(
+                  decoration: BoxDecoration(
+                    color: const Color.fromARGB(255, 2, 41, 167),
+                    borderRadius: BorderRadius.circular(16),
+                  ),
+                  alignment: Alignment.center,
+                  height: 35,
+                  width: double.infinity,
+                  margin: const EdgeInsets.symmetric(horizontal: 20),
+                  child: const Text(
+                    "Exit",
+                    style: TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                      letterSpacing: 2.5,
                       color: Colors.white,
-                      borderRadius: BorderRadius.circular(16),
-                    ),
-                    alignment: Alignment.center,
-                    height: 35,
-                    width: double.infinity,
-                    margin: const EdgeInsets.symmetric(horizontal: 20),
-                    child: const Text(
-                      "Exit",
-                      style: TextStyle(fontSize: 20, letterSpacing: 2.5),
                     ),
                   ),
-                  onTap: () {
-                    SystemNavigator.pop();
-                  },
                 ),
+                onTap: () {
+                  SystemNavigator.pop();
+                },
               ),
             ],
           ),
