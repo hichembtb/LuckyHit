@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
-import 'package:test_app/game.dart';
-import 'package:test_app/home.dart';
-import 'package:test_app/provider.dart';
-import 'package:test_app/winner.dart';
+import 'package:test_app/screens/home_screen.dart';
+import 'package:test_app/helper/app_provider.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -12,24 +10,21 @@ void main() {
     DeviceOrientation.portraitUp,
     DeviceOrientation.portraitDown,
   ]);
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
+  const MyApp({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
       create: (context) {
-        return MyProvider();
+        return AppProvider();
       },
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
-        home: Test(),
-        routes: {
-          "winner": (context) => Winner(),
-          "test": (context) => Test(),
-          "game": (context) => Game(),
-        },
+        home: const HomeScreen(),
         theme: ThemeData(
           scaffoldBackgroundColor: Colors.white,
         ),
